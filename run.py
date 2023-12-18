@@ -2,6 +2,7 @@
 import os
 import random
 import pygame
+from pygame.sprite import Sprite
 
 
 # import the Turtle module
@@ -25,14 +26,15 @@ class Sprite (turtle.Turtle):
     Class set sprite for the base of the objects
     """
     def __init__(self, spriteshape, color, startx, starty):
-        turtle.Turtle.__init__(self, shape = spriteshape)
+        turtle.Turtle.__init__(self, shape=spriteshape)
         self.speed(0)
         self.penup()
         self.color(color)
         self.fd(0)
-        self.goto(startx,starty)
+        self.goto(startx, starty)
         self.speed = 1
-# this is the move function 
+
+# this is the move function
     def move(self):
         self.fd(self.speed)
 
@@ -42,7 +44,7 @@ class Player(Sprite):
     Player class for movement colour and start point 
     """
     def __init__(self, spriteshape, color, startx, starty):
-        Sprite.__init__ (self, spriteshape, color, startx, starty)
+        Sprite.__init__(self, spriteshape, color, startx, starty)
         self.speed = 4
         self.lives = 3
 
@@ -59,9 +61,9 @@ class Player(Sprite):
         self.speed -= 1
 
 
-class Bullet(turtle.sprite.Sprite):
+class Bullet(turtle.pygame.Sprite):
     def __init__(self, start_pos, direction, check, exclude):
-        turtle.sprite.Sprite.__init__(self)
+        turtle.pygame.Sprite.__init__(self)
         self.image = turtle.Surface((10, 10))
         self.image.fill((255, 225, 0))
         self.rect = self.image.get_rect((center=start_pos))
@@ -71,7 +73,8 @@ class Bullet(turtle.sprite.Sprite):
         self.destroy = False
         self.check = check
         self.exclude = exclude
-    #this draws the bullet on screen
+
+    # this draws the bullet on screen
     def draw(self, screen):
         screen.blit(self.image, self.rect)
         
@@ -88,7 +91,7 @@ class Game():
         self.state = "playing"
         self.pen = turtle.Turtle()
         self.lives = 3
-    
+
     def draw_border(self):
         # draw border
         self.pen.speed(0)
@@ -104,15 +107,14 @@ class Game():
         self.pen.ht()
 
 
-# Creat game object
+# Create game object
 game = Game()
 
 # Draw game border
 game.draw_border()
-        
-
-# creat my sprites
-player = Player("triangle", "green", 0,0)
+ 
+# create my sprites
+player = Player("triangle", "green", 0, 0)
 
 # Keyboard binding
 turtle.onkey(player.turn_left, "Left")
@@ -123,15 +125,7 @@ turtle.listen()
 
 # Main game loop
 while True:
-    player.move()
-else:
-    print("Game has stopped working")
+    player.fd(player.speed)
 
 
-
-
-
-
-
-
-delay = raw_input("Press enter to finish.> ")
+run.delay = raw_input("Press enter to finish.> ")
