@@ -1,3 +1,18 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+#Space wars
+import os
+import random
+
+#import the Turtle module
+import turtle
+#required by macos to show window
+turtle.fd(0)
+#sets animation speed
+turtle.speed(0)
+#change background colour
+turtle.bgcolor("black")
+#this hides the defult turtle
+turtle.ht()
+#this save memory 
+turtle.setundobuffer(1)
+# this speeds up the drawing
+turtle.tracer(1)
