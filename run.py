@@ -1,8 +1,6 @@
 # Space wars
 import os
 import random
-import pygame
-from pygame.sprite import Sprite
 
 
 # import the Turtle module
@@ -61,26 +59,36 @@ class Player(Sprite):
         self.speed -= 1
 
 
-class Bullet(turtle.pygame.Sprite):
-    def __init__(self, start_pos, direction, check, exclude):
-        turtle.pygame.Sprite.__init__(self)
-        self.image = turtle.Surface((10, 10))
-        self.image.fill((255, 225, 0))
-        self.rect = self.image.get_rect((center=start_pos))
-        self.direction = direction
-        self.speed = 10
-        self.damage = 5
-        self.destroy = False
-        self.check = check
-        self.exclude = exclude
+class Bullet(turtle.Turtle):
+    """
+    A class to manage bullets fired from a sprite
+    """
+    def __init__(self):
+        """Create a bullet object at the sprite's current position"""
+        super().__init__()
+        self.color("red")
+        self.shape("square")
+        self.penup() 
+        self.speed(0)
+        self.setheading(90)
+        self.hideturtle()
+    
+    def bullet_fired(self, x, y):
+        """
+        Show and move the bullet up the screen
+        """
+        # show the bullet
+        self.showturtle() 
+        # set the position of the bullet
+        self.goto(x, y) 
+        # move the bullet forward
+        self.forward(20)
+        # check if the bullet is out of the screen 
+        if self.ycor() > 280: 
+            self.hideturtle() 
+        # hide the bullet
 
-    # this draws the bullet on screen
-    def draw(self, screen):
-        screen.blit(self.image, self.rect)
-        
-    def update(self):
-
-
+   
 class Game():
     """
     Game class for the game rules and lives
