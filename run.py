@@ -53,3 +53,21 @@ class Player(Sprite):
 
     def decelerate(self):
         self.speed -= 1
+
+class Bullet(turtle.sprite.Sprite):
+    def __init__(self, start_pos, direction, check, exclude):
+        turtle.sprite.Sprite.__init__(self)
+        self.image = turtle.Surface((10, 10))
+        self.image.fill((255, 225, 0))
+        self.rect = self.image.get_rect((center=start_pos))
+        self.direction = direction
+        self.speed = 10
+        self.damage = 5
+        self.destroy = False
+        self.check = check
+        self.exclude = exclude
+    #this draws the bullet on screen
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)
+        
+    def update(self):
