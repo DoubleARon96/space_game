@@ -1,6 +1,8 @@
 # Space wars
 import os
 import random
+import pygame
+
 
 # import the Turtle module
 import turtle
@@ -17,6 +19,7 @@ turtle.setundobuffer(1)
 # this speeds up the drawing
 turtle.tracer(1)
 
+
 class Sprite (turtle.Turtle):
     """
     Class set sprite for the base of the objects
@@ -32,6 +35,7 @@ class Sprite (turtle.Turtle):
 # this is the move function 
     def move(self):
         self.fd(self.speed)
+
 
 class Player(Sprite):
     """
@@ -54,6 +58,7 @@ class Player(Sprite):
     def decelerate(self):
         self.speed -= 1
 
+
 class Bullet(turtle.sprite.Sprite):
     def __init__(self, start_pos, direction, check, exclude):
         turtle.sprite.Sprite.__init__(self)
@@ -71,3 +76,62 @@ class Bullet(turtle.sprite.Sprite):
         screen.blit(self.image, self.rect)
         
     def update(self):
+
+
+class Game():
+    """
+    Game class for the game rules and lives
+    """
+    def __init__(self):
+        self.level = 1
+        self.score = 0
+        self.state = "playing"
+        self.pen = turtle.Turtle()
+        self.lives = 3
+    
+    def draw_border(self):
+        # draw border
+        self.pen.speed(0)
+        self.pen.color("white")
+        self.pen.pensize(3)
+        self.pen.penup()
+        self.pen.goto(-300, 300)
+        self.pen.pendown()
+        for side in range(4):
+            self.pen.fd(600)
+            self.pen.rt(90)
+        self.pen.penup()
+        self.pen.ht()
+
+
+# Creat game object
+game = Game()
+
+# Draw game border
+game.draw_border()
+        
+
+# creat my sprites
+player = Player("triangle", "green", 0,0)
+
+# Keyboard binding
+turtle.onkey(player.turn_left, "Left")
+turtle.onkey(player.turn_right, "Right")
+turtle.onkey(player.accelerate, "Up")
+turtle.onkey(player.decelerate, "Down")
+turtle.listen()
+
+# Main game loop
+while True:
+    player.move()
+else:
+    print("Game has stopped working")
+
+
+
+
+
+
+
+
+delay = raw_input("Press enter to finish.> ")
